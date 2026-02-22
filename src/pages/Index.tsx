@@ -102,7 +102,7 @@ const Index = () => {
         {!results && (
           <div className="text-center space-y-2 py-4">
             <h2 className="text-3xl sm:text-4xl font-extrabold">
-              <span className="gradient-text">Automatic Duty Allocation</span>
+              <span className="gradient-text">EXAM DUTY MANAGER</span>
             </h2>
             <p className="text-muted-foreground max-w-lg mx-auto">
               Upload your teacher list and exam schedule to generate a fair, balanced, and conflict-free duty assignment.
