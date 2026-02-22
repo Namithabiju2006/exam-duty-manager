@@ -1,5 +1,6 @@
-import * as XLSX from 'xlsx';
 import { Teacher, ExamRequirement } from './types';
+
+declare const XLSX: any;
 
 function formatDate(value: unknown): string {
   if (value instanceof Date) {
@@ -25,7 +26,7 @@ export function parseTeachers(file: File): Promise<Teacher[]> {
       try {
         const wb = XLSX.read(e.target?.result, { type: 'array', cellDates: true });
         const ws = wb.Sheets[wb.SheetNames[0]];
-        const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws);
+        const rows: Record<string, unknown>[] = XLSX.utils.sheet_to_json(ws);
 
         const teachers: Teacher[] = rows.map((row, idx) => {
           const keys = Object.keys(row);
@@ -60,7 +61,7 @@ export function parseRequirements(file: File): Promise<ExamRequirement[]> {
       try {
         const wb = XLSX.read(e.target?.result, { type: 'array', cellDates: true });
         const ws = wb.Sheets[wb.SheetNames[0]];
-        const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws);
+        const rows: Record<string, unknown>[] = XLSX.utils.sheet_to_json(ws);
 
         const reqs: ExamRequirement[] = rows.map((row) => {
           const keys = Object.keys(row);

@@ -1,4 +1,4 @@
-import * as XLSX from 'xlsx';
+declare const XLSX: any;
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { TeacherDutyResult } from './types';
