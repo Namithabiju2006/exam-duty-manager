@@ -6,17 +6,20 @@ function formatDate(value: unknown): string {
   if (value instanceof Date) {
     const d = value.getDate().toString().padStart(2, '0');
     const m = (value.getMonth() + 1).toString().padStart(2, '0');
-    const y = value.getFullYear();
-    return `${d}-${m}-${y}`;
+    return `${d}-${m}`;
   }
   if (typeof value === 'number') {
     // Excel serial date
     const date = XLSX.SSF.parse_date_code(value);
     const d = date.d.toString().padStart(2, '0');
     const m = date.m.toString().padStart(2, '0');
-    return `${d}-${m}-${date.y}`;
+    return `${d}-${m}`;
   }
-  return String(value || '');
+  // If string contains year like "10-03-2026", strip the year part
+  const str = String(value || '');
+  const match = str.match(/^(\d{2}-\d{2})-\d{4}$/);
+  if (match) return match[1];
+  return str;
 }
 
 export function parseTeachers(file: File): Promise<Teacher[]> {
