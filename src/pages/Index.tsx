@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Users, FileSpreadsheet, Zap, Download, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import FileUpload from '@/components/FileUpload';
 import DashboardSummary from '@/components/DashboardSummary';
 import DutyTable from '@/components/DutyTable';
+import DateWiseDutyTable from '@/components/DateWiseDutyTable';
 import { Teacher, ExamRequirement, TeacherDutyResult } from '@/lib/types';
 import { parseTeachers, parseRequirements } from '@/lib/excelParser';
 import { allocateDuties } from '@/lib/dutyAllocator';
@@ -150,12 +152,23 @@ const Index = () => {
         {results && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-foreground">Teacher-wise Duty List</h3>
+              <h3 className="text-xl font-bold text-foreground">Duty Allocation Results</h3>
               <p className="text-sm text-muted-foreground">
                 {results.length} teachers · {results.reduce((s, r) => s + r.assignments.length, 0)} duties assigned
               </p>
             </div>
-            <DutyTable results={results} />
+            <Tabs defaultValue="teacher-wise" className="w-full">
+              <TabsList className="mb-4">
+                <TabsTrigger value="teacher-wise">Teacher-Wise</TabsTrigger>
+                <TabsTrigger value="date-wise">Date & Session-Wise</TabsTrigger>
+              </TabsList>
+              <TabsContent value="teacher-wise">
+                <DutyTable results={results} />
+              </TabsContent>
+              <TabsContent value="date-wise">
+                <DateWiseDutyTable results={results} />
+              </TabsContent>
+            </Tabs>
           </div>
         )}
       </main>
