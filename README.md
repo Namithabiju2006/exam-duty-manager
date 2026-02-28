@@ -78,29 +78,19 @@ Example:
 
 10-03-2026  FN  Invigilator  Anitha  Maths
 10-03-2026  FN  Squad        Biju    Physics
-⚙️ Installation & Setup
-🔹 Prerequisites
 
-Make sure you have installed:
+Installation & Setup
+Prerequisites
+-Node.js
+-npm
 
-Node.js
-
-npm
-
-🔹 Steps to Run Locally
-# Clone the repository
+Run Locally
 git clone <YOUR_GIT_URL>
-
-# Go to project folder
 cd <PROJECT_NAME>
-
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
-💻 Technologies Used
 
+Technologies Used
 React
 
 TypeScript
