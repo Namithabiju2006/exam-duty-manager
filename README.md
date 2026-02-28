@@ -3,8 +3,7 @@ EXAM DUTY ALLOCATOR
 
 📝 Description
 
-Exam Duty Allocator is a web application that automatically assigns examination invigilation and squad duties to teachers using Excel input data.
-The system ensures fair duty distribution, prevents scheduling conflicts, and generates organized reports for easy management.
+Exam Duty Manager is a web-based application designed to automate the allocation of examination invigilation and squad duties for teachers. It processes Excel input data to generate fair, balanced, and conflict-free duty schedules, providing both teacher-wise and date/session-wise reports for efficient exam management.
 
 🚀 Features
 
