@@ -1,4 +1,4 @@
-EXAM DUTY ALLOCATOR
+# 🎓 EXAM DUTY MANAGER
 
 
 📝 Description
@@ -26,6 +26,13 @@ https://dutygen.lovable.app/
 📅 Date & session-wise duty allocation sheet
 
 📥 Export results as Excel or PDF
+## ⚙️ How It Works
+
+1. Upload teacher details Excel sheet
+2. Upload exam schedule sheet
+3. Click "Generate Duty Allocation"
+4. System assigns duties fairly
+5. Download reports
 
 📥 Input Requirements
 
@@ -80,18 +87,37 @@ Example:
 10-03-2026  FN  Invigilator  Anitha  Maths
 10-03-2026  FN  Squad        Biju    Physics
 
+PROJECT SCREENSHOTS
+
+
+<img width="1897" height="740" alt="01" src="https://github.com/user-attachments/assets/2814f82a-40e5-4cdf-a05b-7c5f82b69e28" />
+
+<img width="1850" height="897" alt="02" src="https://github.com/user-attachments/assets/ab76e08b-0e42-42f8-8563-6f4a6c7183eb" />
+
+<img width="1836" height="870" alt="03" src="https://github.com/user-attachments/assets/77e77957-2e08-4b11-9545-69f3e416cafe" />
+
+<img width="1628" height="818" alt="04" src="https://github.com/user-attachments/assets/0cecdbcc-ac31-44b9-a26b-9bc50e7a63e2" />
+
+<img width="905" height="806" alt="05" src="https://github.com/user-attachments/assets/dc087f9c-edc3-485f-acdb-7c00dbf28907" />
+
+
+
 Installation & Setup
+
 Prerequisites
--Node.js
--npm
+
+- Node.js
+- npm
 
 Run Locally
+
 git clone <YOUR_GIT_URL>
 cd <PROJECT_NAME>
 npm install
 npm run dev
 
 Technologies Used
+
 React
 
 TypeScript
@@ -115,6 +141,22 @@ Ensuring fair duty allocation
 Preventing assignment conflicts
 
 Providing clear and downloadable reports
+
+📂 Project Structure
+
+exam-duty-manager/
+│
+├── src/                # Main source code
+│   ├── components/     # Reusable UI components
+│   ├── pages/          # Application pages/screens
+│   ├── utils/          # Helper functions (Excel parsing, duty logic)
+│   ├── App.tsx         # Main app component
+│   └── main.tsx        # Entry point
+│
+├── public/             # Static assets
+├── package.json        # Project dependencies
+├── vite.config.ts      # Vite configuration
+└── README.md           # Project documentation
 
 👩‍💻 Author
 
