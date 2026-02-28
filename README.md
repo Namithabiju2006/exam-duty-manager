@@ -1,73 +1,136 @@
-# Welcome to your Lovable project
+Exam Duty Manager
+📝 Description
 
-## Project info
+Exam Duty Manager is a web application that automatically assigns examination invigilation and squad duties to teachers using Excel input data.
+The system ensures fair duty distribution, prevents scheduling conflicts, and generates organized reports for easy management.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+🚀 Features
 
-## How can I edit this code?
+📂 Upload teacher and exam data via Excel files
 
-There are several ways of editing your application.
+⚡ Automatic duty allocation based on rules
 
-**Use Lovable**
+⚖️ Equal distribution of duties among teachers
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+🚫 Only one duty assigned per teacher per day
 
-Changes made via Lovable will be committed automatically to this repo.
+👥 Separate handling for Squad and Invigilator roles
 
-**Use your preferred IDE**
+📊 Teacher-wise duty list generation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+📅 Date & session-wise duty allocation sheet
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+📥 Export results as Excel or PDF
 
-Follow these steps:
+📥 Input Requirements
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+The system requires two Excel sheets:
+
+1️⃣ Teacher Details Sheet
+
+Must include:
+
+Serial Number
+
+Teacher Name
+
+Department
+
+Duty Type
+
+"Squad" → Only squad duty
+
+Others → Invigilator
+
+2️⃣ Exam Duty Requirements Sheet
+
+Must include:
+
+Exam Date
+
+Session (FN / AN)
+
+Number of Invigilators Required
+
+Number of Squad Members Required
+
+📊 Output Generated
+
+The system produces two reports:
+
+✅ 1. Teacher-Wise Duty List
+
+Each teacher appears once with all assigned duties listed.
+
+Example:
+
+1  Anitha  Maths    Invigilator   10-03(FN)  15-03(AN)  22-03(FN)
+2  Biju    Physics  Squad         10-03(AN)  18-03(FN)
+✅ 2. Date & Session-Wise Allocation
+
+Shows which teachers are assigned for each exam session.
+
+Example:
+
+10-03-2026  FN  Invigilator  Anitha  Maths
+10-03-2026  FN  Squad        Biju    Physics
+⚙️ Installation & Setup
+🔹 Prerequisites
+
+Make sure you have installed:
+
+Node.js
+
+npm
+
+🔹 Steps to Run Locally
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Go to project folder
+cd <PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Run development server
 npm run dev
-```
+💻 Technologies Used
 
-**Edit a file directly in GitHub**
+React
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+TypeScript
 
-**Use GitHub Codespaces**
+Vite
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Tailwind CSS
 
-## What technologies are used for this project?
+shadcn-ui
 
-This project is built with:
+SheetJS (for Excel processing)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+🎯 Project Objective
 
-## How can I deploy this project?
+This project aims to simplify exam duty management by:
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Reducing manual scheduling work
 
-## Can I connect a custom domain to my Lovable project?
+Ensuring fair duty allocation
 
-Yes, you can!
+Preventing assignment conflicts
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Providing clear and downloadable reports
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+👩‍💻 Author
+
+Developed as an academic project for automating examination duty allocation in educational institutions.
+
+📌 Future Enhancements
+
+Admin login system
+
+Manual duty editing
+
+Conflict detection alerts
+
+Email notifications for teachers
