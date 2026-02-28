@@ -5,6 +5,9 @@ EXAM DUTY ALLOCATOR
 
 Exam Duty Manager is a web-based application designed to automate the allocation of examination invigilation and squad duties for teachers. It processes Excel input data to generate fair, balanced, and conflict-free duty schedules, providing both teacher-wise and date/session-wise reports for efficient exam management.
 
+Project URL
+https://dutygen.lovable.app/
+
 🚀 Features
 
 📂 Upload teacher and exam data via Excel files
