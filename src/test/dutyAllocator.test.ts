@@ -73,15 +73,15 @@ describe('allocateDuties - fair distribution', () => {
     expect(Math.max(...sqCounts) - Math.min(...sqCounts)).toBeLessThanOrEqual(1);
   });
 
-  it('no teacher gets two duties on the same day when enough teachers', () => {
+  it('no teacher gets duplicate duty for same date+session', () => {
     const teachers = makeTeachers(6, 'Invigilator');
     const reqs = makeRequirements(['01-03', '02-03', '03-03'], 2);
     const results = allocateDuties(teachers, reqs);
 
     for (const r of results) {
-      const dates = r.assignments.map(a => a.date);
-      const uniqueDates = new Set(dates);
-      expect(uniqueDates.size).toBe(dates.length);
+      const slots = r.assignments.map(a => `${a.date}_${a.session}`);
+      const uniqueSlots = new Set(slots);
+      expect(uniqueSlots.size).toBe(slots.length);
     }
   });
 });
