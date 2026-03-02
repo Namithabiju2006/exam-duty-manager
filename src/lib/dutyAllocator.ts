@@ -14,12 +14,12 @@ export function allocateDuties(
   invigilators.forEach((_, i) => invigilatorAssignments.set(i, []));
   squadMembers.forEach((_, i) => squadAssignments.set(i, []));
 
-  // Track which teachers are busy on which date
-  const invigilatorDayUsed: Map<number, Set<string>> = new Map();
-  const squadDayUsed: Map<number, Set<string>> = new Map();
+  // Track which teachers are busy on which date+session
+  const invigilatorSlotUsed: Map<number, Set<string>> = new Map();
+  const squadSlotUsed: Map<number, Set<string>> = new Map();
 
-  invigilators.forEach((_, i) => invigilatorDayUsed.set(i, new Set()));
-  squadMembers.forEach((_, i) => squadDayUsed.set(i, new Set()));
+  invigilators.forEach((_, i) => invigilatorSlotUsed.set(i, new Set()));
+  squadMembers.forEach((_, i) => squadSlotUsed.set(i, new Set()));
 
   // Sort requirements by date then session for consistent processing
   const sorted = [...requirements].sort((a, b) => {
@@ -33,7 +33,7 @@ export function allocateDuties(
     assignGroup(
       invigilators,
       invigilatorAssignments,
-      invigilatorDayUsed,
+      invigilatorSlotUsed,
       req.date,
       req.session,
       req.invigilatorsRequired
@@ -43,7 +43,7 @@ export function allocateDuties(
     assignGroup(
       squadMembers,
       squadAssignments,
-      squadDayUsed,
+      squadSlotUsed,
       req.date,
       req.session,
       req.squadRequired
@@ -89,17 +89,19 @@ export function allocateDuties(
 function assignGroup(
   members: Teacher[],
   assignments: Map<number, DutyAssignment[]>,
-  dayUsed: Map<number, Set<string>>,
+  slotUsed: Map<number, Set<string>>,
   date: string,
   session: 'FN' | 'AN',
   count: number
 ) {
   if (members.length === 0 || count === 0) return;
 
-  // Get eligible members (not already assigned on this date)
+  const slotKey = `${date}_${session}`;
+
+  // Get eligible members (not already assigned to this exact date+session)
   const eligible = members
     .map((_, idx) => idx)
-    .filter(idx => !dayUsed.get(idx)!.has(date));
+    .filter(idx => !slotUsed.get(idx)!.has(slotKey));
 
   // Sort eligible by: fewest assignments first, then by serial number (slNo) for tiebreak
   eligible.sort((a, b) => {
@@ -112,12 +114,17 @@ function assignGroup(
   // Select the first `count` eligible teachers (already sorted by fairness)
   const selected = eligible.slice(0, count);
 
-  // If still not enough (all busy that day), allow double-booking as last resort
+  // If still not enough, allow double-booking as last resort (with fair sorting)
   if (selected.length < count) {
     const remaining = members
       .map((_, idx) => idx)
       .filter(idx => !selected.includes(idx))
-      .sort((a, b) => assignments.get(a)!.length - assignments.get(b)!.length);
+      .sort((a, b) => {
+        const countA = assignments.get(a)!.length;
+        const countB = assignments.get(b)!.length;
+        if (countA !== countB) return countA - countB;
+        return members[a].slNo - members[b].slNo;
+      });
     
     for (const idx of remaining) {
       if (selected.length >= count) break;
@@ -128,6 +135,6 @@ function assignGroup(
   // Assign duties
   for (const idx of selected) {
     assignments.get(idx)!.push({ date, session });
-    dayUsed.get(idx)!.add(date);
+    slotUsed.get(idx)!.add(slotKey);
   }
 }
