@@ -101,36 +101,16 @@ function assignGroup(
     .map((_, idx) => idx)
     .filter(idx => !dayUsed.get(idx)!.has(date));
 
-  // Sort eligible by: fewest assignments first, then try different departments
+  // Sort eligible by: fewest assignments first, then by serial number (slNo) for tiebreak
   eligible.sort((a, b) => {
     const countA = assignments.get(a)!.length;
     const countB = assignments.get(b)!.length;
-    return countA - countB;
+    if (countA !== countB) return countA - countB;
+    return members[a].slNo - members[b].slNo;
   });
 
-  // Try to diversify departments: among those with same duty count, prefer different departments
-  const selected: number[] = [];
-  const selectedDepts = new Set<string>();
-
-  // First pass: pick from different departments, fewest duties first
-  for (const idx of eligible) {
-    if (selected.length >= count) break;
-    const dept = members[idx].department;
-    if (!selectedDepts.has(dept)) {
-      selected.push(idx);
-      selectedDepts.add(dept);
-    }
-  }
-
-  // Second pass: fill remaining from eligible (allow same dept)
-  if (selected.length < count) {
-    for (const idx of eligible) {
-      if (selected.length >= count) break;
-      if (!selected.includes(idx)) {
-        selected.push(idx);
-      }
-    }
-  }
+  // Select the first `count` eligible teachers (already sorted by fairness)
+  const selected = eligible.slice(0, count);
 
   // If still not enough (all busy that day), allow double-booking as last resort
   if (selected.length < count) {
